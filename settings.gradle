@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = 'java-spring-htmx-examples'
-include('app', 'list', 'utilities')
+include('todo1', 'app', 'list', 'utilities')

@@ -24,6 +24,12 @@ class ToDoServiceTest {
   }
 
   @Test
+  void findAllWhenOk() {
+    List<ToDoWeb> todos = toDoService.findAll();
+    Assertions.assertEquals(1, todos.size());
+  }
+
+  @Test
   void initialiseWhenOk() {
     List<ToDoWeb> todos = toDoService.findByTitle(DataInitialiser.TEST_TITLE);
     Assertions.assertEquals(1, todos.size());

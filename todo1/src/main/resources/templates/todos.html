@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDos with HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- link rel="stylesheet" href="responsive-grid-style.css" -->
+    <link rel="stylesheet" href="todos-style.css" >
+</head>
+<body class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+<h1>ToDos with Htmx</h1>
+
+<div class="todos-list">
+    <div th:each="todo: ${todos}" th:fragment="todos" class="todo line">
+        <div class="id" th:text="${todo.id}">245</div>
+        <div class="title" th:text="${todo.title}">title</div>
+        <div class="buttons">
+            <button hx-confirm="Are you sure?"
+                    hx-target="closest .todo"
+                    hx-swap="outerHTML"
+                    class="btn btn-danger"
+                    hx-trigger="click">
+                    <!-- th:attr="hx-delete=@{/todos/{id}(id=${todo.id)}" -->
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="todos-form" th:fragment="todos-form" hx-swap-oob="true" class="todos-form">
+    <div class="todo line ">
+        <div></div>
+        <div class="title">
+            <input type="text" name="new-todo" id="new-todo" />
+        </div>
+        <div class="buttons">
+            <button
+                hx-include="#new-todo"
+                hx-post="/todos"
+                hx-target=".todos-list"
+                hx-trigger="click">
+                Add
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="line">
+    <button hx-post="/todos/reset"
+            hx-target=".todos-list">
+        Reset All
+    </button>
+</div>
+
+</body>
+</html>

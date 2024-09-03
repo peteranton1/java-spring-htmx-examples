@@ -1,0 +1,39 @@
+:root {
+    --gutter : 0.5em;
+}
+body {
+    padding: var(--gutter)
+}
+.line {
+    border-top: 1px solid black;
+    margin-top: var(--gutter)
+    padding-top: var(--gutter)
+}
+.title input[type-text] {
+    width: calc(100% - var(--gutter));
+}
+
+.todos-list {
+
+}
+
+.todo {
+    grid-gap: var(--gutter) ;
+    display: grid;
+    grid: id title buttons ;
+    grid-template-columns: 1vw auto 20vw;
+}
+
+.todo .buttons {
+    grid-area: buttons;
+}
+
+.todo .title {
+    grid-area: title;
+    text-align: left;
+}
+
+.todo .id {
+    grid-area: id;
+    text-align: right;
+}
